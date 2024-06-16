@@ -1,0 +1,19 @@
+{
+  "name": "bookshelf-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhaatha/bookshelf-api.git"
+  },
+  "author": "mhaatha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhaatha/bookshelf-api/issues"
+  },
+  "homepage": "https://github.com/mhaatha/bookshelf-api#readme",
+  "description": ""
+}
