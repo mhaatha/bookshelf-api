@@ -13,11 +13,11 @@ const addBookToBookshelf = (request, h) => {
     reading,
   } = request.payload;
   const id = nanoid(16);
-  const createdAt = new Date().toISOString();
-  const updatedAt = createdAt;
+  const insertedAt = new Date().toISOString();
+  const updatedAt = insertedAt;
 
   // Error validations Status Code = 400
-  if (name === undefined) {
+  if (name === undefined || name === '') {
     const response = h.response({
       status: 'fail',
       message: 'Gagal menambahkan buku. Mohon isi nama buku',
@@ -54,7 +54,7 @@ const addBookToBookshelf = (request, h) => {
 
   // Memasukkan data ke dalam bookshelf
   bookshelf.push(data);
-
+  
   // Is book pushed into bookshelf validation
   const isSuccess = bookshelf.filter((book) => book.id === id).length > 0;
 
