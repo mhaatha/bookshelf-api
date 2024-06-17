@@ -52,7 +52,7 @@ const addBookToBookshelf = (request, h) => {
     updatedAt,
   };
 
-  // Memasukkan data ke dalam bookshelf
+  // Push data into bookshelf
   bookshelf.push(data);
   
   // Is book pushed into bookshelf validation
