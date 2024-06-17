@@ -16,5 +16,11 @@
     "url": "https://github.com/mhaatha/bookshelf-api/issues"
   },
   "homepage": "https://github.com/mhaatha/bookshelf-api#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
 }
