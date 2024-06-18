@@ -121,7 +121,7 @@ const updateBook = (request, h) => {
       .response({
         status: 'fail',
         message:
-          'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+          'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
       })
       .code(400);
   }
@@ -153,7 +153,7 @@ const updateBook = (request, h) => {
     return h
       .response({
         status: 'success',
-        message: 'Buku berhasil diperbaharui',
+        message: 'Buku berhasil diperbarui',
       })
       .code(200);
   }
