@@ -147,18 +147,36 @@ const updateBook = (request, h) => {
       pageCount,
       readPage,
       reading,
-      updatedAt
-    }
+      updatedAt,
+    };
 
-    return h.response({
-      status: 'success',
-      message: 'Buku berhasil diperbaharui'
-    }).code(200);
+    return h
+      .response({
+        status: 'success',
+        message: 'Buku berhasil diperbaharui',
+      })
+      .code(200);
   }
 };
 
 const deleteBook = (request, h) => {
-  return 'under maintenance';
+  const { bookId } = request.params;
+  const index = bookshelf.findIndex((book) => book.id === bookId);
+
+  if (index === -1) {
+    return h
+      .response({
+        status: 'fail',
+        message: 'Buku gagal dihapus. Id tidak ditemukan',
+      })
+      .code(404);
+  } else {
+    bookshelf.splice(index, 1);
+    return h.response({
+      status: 'success',
+      message: 'Buku berhasil dihapus',
+    });
+  }
 };
 
 module.exports = {
