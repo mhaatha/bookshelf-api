@@ -28,6 +28,12 @@ module.exports = [
     method: 'PUT',
     path: '/books/{bookId}',
     handler: updateBook,
+    options: {
+      validate: {
+        payload: bookshelfSchema,
+        failAction: postBookErrorHandler,
+      }
+    }
   },
   {
     method: 'DELETE',
