@@ -15,4 +15,10 @@ const bookshelfSchema = Joi.object({
   updatedAt: Joi.date(),
 });
 
-module.exports = { bookshelfSchema };
+const bookshelfQuerySchema = Joi.object({
+  name: Joi.string(),
+  reading: Joi.string().min(0).max(1),
+  finished: Joi.string().min(0).max(1),
+});
+
+module.exports = { bookshelfSchema, bookshelfQuerySchema };

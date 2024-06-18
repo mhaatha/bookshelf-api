@@ -1,6 +1,6 @@
 const { addBookToBookshelf, getAllBooks, getBookById, updateBook, deleteBook } = require('../handlers/book.handler');
-const { bookshelfSchema } = require('../validations/book.validate');
-const { postBookErrorHandler, putBookErrorHandler } = require('../errors/book.error');
+const { bookshelfSchema, bookshelfQuerySchema } = require('../validations/book.validate');
+const { postBookErrorHandler, putBookErrorHandler, getQueryErrorHandler } = require('../errors/book.error');
 
 module.exports = [
   {
@@ -18,6 +18,12 @@ module.exports = [
     method: 'GET',
     path: '/books',
     handler: getAllBooks,
+    options: {
+      validate: {
+        query: bookshelfQuerySchema,
+        failAction: getQueryErrorHandler,
+      }
+    }
   },
   {
     method: 'GET',

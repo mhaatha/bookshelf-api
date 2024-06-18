@@ -62,7 +62,31 @@ const addBookToBookshelf = (request, h) => {
 };
 
 const getAllBooks = (request, h) => {
-  const selectedProperties = bookshelf.map(({ id, name, publisher }) => ({
+  const { name, reading, finished } = request.query;
+
+  const filteredBooks = bookshelf.filter((book) => {
+    if (name && !book.name.toLowerCase().includes(name.toLowerCase())) {
+      return false;
+    }
+
+    if (reading !== undefined) {
+      const readingBool = reading === '1';
+      if (book.reading !== readingBool) {
+        return false;
+      }
+    }
+
+    if (finished !== undefined) {
+      const finishedBool = finished === '1';  
+      if (book.finished !== finishedBool) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  const selectedProperties = filteredBooks.map(({ id, name, publisher }) => ({
     id,
     name,
     publisher,

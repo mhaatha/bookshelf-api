@@ -20,4 +20,8 @@ const putBookErrorHandler = (request, h, error) => {
     .takeover(); // takeover method is to stop further processing and immediately return a custom response.
 }
 
-module.exports = { postBookErrorHandler, putBookErrorHandler };
+const getQueryErrorHandler = (request, h, error) => {
+  console.error(error);
+}
+
+module.exports = { postBookErrorHandler, putBookErrorHandler, getQueryErrorHandler };
