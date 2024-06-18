@@ -62,7 +62,17 @@ const addBookToBookshelf = (request, h) => {
 };
 
 const getAllBooks = (request, h) => {
-  return nanoid(16).length;
+  const selectedProperties = bookshelf.map(({ id, name, publisher }) => ({
+    id, name, publisher
+  }));
+  return h
+    .response({
+      status: 'success',
+      data: {
+        books: selectedProperties
+      }
+    })
+    .code(200);
 };
 
 const getBookById = (request, h) => {
