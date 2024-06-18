@@ -63,21 +63,40 @@ const addBookToBookshelf = (request, h) => {
 
 const getAllBooks = (request, h) => {
   const selectedProperties = bookshelf.map(({ id, name, publisher }) => ({
-    id, name, publisher
+    id,
+    name,
+    publisher,
   }));
-  
+
   return h
     .response({
       status: 'success',
       data: {
-        books: selectedProperties
-      }
+        books: selectedProperties,
+      },
     })
     .code(200);
 };
 
 const getBookById = (request, h) => {
-  return 'under maintenance';
+  const { bookId } = request.params;
+  const isDataExist = bookshelf.filter((book) => book.id === bookId);
+
+  if (isDataExist.length > 0) {
+    return h.response({
+      status: 'success',
+      data: {
+        book: isDataExist[0],
+      },
+    }).code(200);
+  } else {
+    return h
+      .response({
+        status: 'fail',
+        message: 'Buku tidak ditemukan',
+      })
+      .code(400);
+  }
 };
 
 const updateBook = (request, h) => {
