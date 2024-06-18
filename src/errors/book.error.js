@@ -1,4 +1,5 @@
 const postBookErrorHandler = (request, h, error) => {
+  console.error(error);
   return h
     .response({
       status: 'fail',
@@ -9,6 +10,7 @@ const postBookErrorHandler = (request, h, error) => {
 };
 
 const putBookErrorHandler = (request, h, error) => {
+  console.error(error);
   return h
     .response({
       status: 'fail',
