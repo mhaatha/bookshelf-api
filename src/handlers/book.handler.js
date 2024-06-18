@@ -83,24 +83,78 @@ const getBookById = (request, h) => {
   const isDataExist = bookshelf.filter((book) => book.id === bookId);
 
   if (isDataExist.length > 0) {
-    return h.response({
-      status: 'success',
-      data: {
-        book: isDataExist[0],
-      },
-    }).code(200);
+    return h
+      .response({
+        status: 'success',
+        data: {
+          book: isDataExist[0],
+        },
+      })
+      .code(200);
   } else {
     return h
       .response({
         status: 'fail',
         message: 'Buku tidak ditemukan',
       })
-      .code(400);
+      .code(404);
   }
 };
 
 const updateBook = (request, h) => {
-  return 'under maintenance';
+  const { bookId } = request.params;
+  const {
+    name,
+    year,
+    author,
+    summary,
+    publisher,
+    pageCount,
+    readPage,
+    reading,
+  } = request.payload;
+  const updatedAt = new Date().toISOString();
+
+  // Error validation readPage must not exceed pageCount
+  if (readPage > pageCount) {
+    return h
+      .response({
+        status: 'fail',
+        message:
+          'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+      })
+      .code(400);
+  }
+
+  // Error validation id must exists
+  const index = bookshelf.findIndex((book) => book.id === bookId);
+
+  if (index === -1) {
+    return h
+      .response({
+        status: 'fail',
+        message: 'Gagal memperbarui buku. Id tidak ditemukan',
+      })
+      .code(404);
+  } else {
+    bookshelf[index] = {
+      ...bookshelf[index],
+      name,
+      year,
+      author,
+      summary,
+      publisher,
+      pageCount,
+      readPage,
+      reading,
+      updatedAt
+    }
+
+    return h.response({
+      status: 'success',
+      message: 'Buku berhasil diperbaharui'
+    }).code(200);
+  }
 };
 
 const deleteBook = (request, h) => {
