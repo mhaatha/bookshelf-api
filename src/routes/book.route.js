@@ -1,6 +1,6 @@
 const { addBookToBookshelf, getAllBooks, getBookById, updateBook, deleteBook } = require('../handlers/book.handler');
 const { bookshelfSchema } = require('../validations/book.validate');
-const { postBookErrorHandler } = require('../errors/book.error');
+const { postBookErrorHandler, putBookErrorHandler } = require('../errors/book.error');
 
 module.exports = [
   {
@@ -31,7 +31,7 @@ module.exports = [
     options: {
       validate: {
         payload: bookshelfSchema,
-        failAction: postBookErrorHandler,
+        failAction: putBookErrorHandler,
       }
     }
   },
