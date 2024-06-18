@@ -65,6 +65,7 @@ const getAllBooks = (request, h) => {
   const selectedProperties = bookshelf.map(({ id, name, publisher }) => ({
     id, name, publisher
   }));
+  
   return h
     .response({
       status: 'success',
