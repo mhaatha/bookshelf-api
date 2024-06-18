@@ -16,26 +16,16 @@ const addBookToBookshelf = (request, h) => {
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
 
-  // Error validations Status Code = 400
-  if (name === undefined || name === '') {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal menambahkan buku. Mohon isi nama buku',
-    });
-    response.code(400);
-    return response;
-  }
+  // Error validation readPage must not exceed pageCount
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+      message:
+        'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
   }
-
-  // Is book has been finished validation
-  const isFinished = pageCount === readPage;
 
   const data = {
     id,
@@ -46,7 +36,7 @@ const addBookToBookshelf = (request, h) => {
     publisher,
     pageCount,
     readPage,
-    finished: isFinished,
+    finished: readPage === pageCount,
     reading,
     insertedAt,
     updatedAt,
@@ -54,7 +44,7 @@ const addBookToBookshelf = (request, h) => {
 
   // Push data into bookshelf
   bookshelf.push(data);
-  
+
   // Is book pushed into bookshelf validation
   const isSuccess = bookshelf.filter((book) => book.id === id).length > 0;
 
