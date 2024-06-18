@@ -1,10 +1,11 @@
 const postBookErrorHandler = (request, h, error) => {
-  const response = h.response({
-    status: 'fail',
-    message: 'Gagal menambahkan buku. Mohon isi nama buku',
-  });
-  response.code(400);
-  return response;
+  return h
+    .response({
+      status: 'fail',
+      message: 'Gagal menambahkan buku. Mohon isi nama buku',
+    })
+    .code(400)
+    .takeover(); // takeover method is to stop further processing and immediately return a custom response.
 };
 
 module.exports = { postBookErrorHandler };

@@ -18,13 +18,13 @@ const addBookToBookshelf = (request, h) => {
 
   // Error validation readPage must not exceed pageCount
   if (readPage > pageCount) {
-    const response = h.response({
-      status: 'fail',
-      message:
-        'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
-    });
-    response.code(400);
-    return response;
+    return h
+      .response({
+        status: 'fail',
+        message:
+          'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+      })
+      .code(400);
   }
 
   const data = {
@@ -49,15 +49,15 @@ const addBookToBookshelf = (request, h) => {
   const isSuccess = bookshelf.filter((book) => book.id === id).length > 0;
 
   if (isSuccess) {
-    const response = h.response({
-      status: 'success',
-      message: 'Buku berhasil ditambahkan',
-      data: {
-        bookId: id,
-      },
-    });
-    response.code(201);
-    return response;
+    return h
+      .response({
+        status: 'success',
+        message: 'Buku berhasil ditambahkan',
+        data: {
+          bookId: id,
+        },
+      })
+      .code(201);
   }
 };
 
